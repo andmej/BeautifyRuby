@@ -16,7 +16,8 @@ module ERBeautify
         options = Hash.new
         translate_spaces_to_tabs = config['translate_tabs_to_spaces'] == 'False' ? { indent: "\t" } : Hash.new
         tab_size = (config['tab_size'].to_i != 0 and config['translate_tabs_to_spaces'] != 'False') ? { tab_stops: config['tab_size'].to_i } : Hash.new
-        options = options.merge(tab_size).merge(translate_spaces_to_tabs)
+        keep_blank_lines = { keep_blank_lines: 2 }
+        options = options.merge(tab_size).merge(translate_spaces_to_tabs).merge(keep_blank_lines)
         beautify $stdin.read.force_encoding('utf-8'), $stdout, options
       end
     end
